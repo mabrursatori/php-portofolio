@@ -44,7 +44,7 @@ if (isset($_POST['cari'])) {
                     <a href="ubah.php?id=<?= $mhs['id']; ?>">Edit</a> |
                     <a href="hapus.php?id=<?= $mhs['id']; ?>" onclick=" return confirm('apakah anda yakin?');">Delete</a>
                 </td>
-                <td><img src="image/" width="100"></td>
+                <td><img src="img/<?= $mhs['gambar']; ?>" width="100"></td>
                 <td><?= $mhs['nrp']; ?></td>
                 <td><?= $mhs['nama']; ?></td>
                 <td><?= $mhs['email']; ?></td>

@@ -37,8 +37,9 @@ alert('Data gagal diubah');
 
 <body>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $mhs['id']; ?>">
+        <input type="hidden" name="gambarLama" value="<?= $mhs['gambar']; ?>">
         <ul>
             <li>
                 <label for="nrp">NRP : </label>
@@ -58,7 +59,8 @@ alert('Data gagal diubah');
             </li>
             <li>
                 <label for="gambar">Gambar : </label>
-                <input type="text" name="gambar" id="gambar" required value="<?= $mhs['gambar']; ?>">
+                <input type="file" name="gambar" id="gambar">
+                <img src="img/<?= $mhs['gambar']; ?>" alt="">
             </li>
             <li>
                 <button type="submit" name="submit">Tambah Data</button>
