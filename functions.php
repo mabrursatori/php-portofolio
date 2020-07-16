@@ -130,7 +130,7 @@ function registrasi($data)
         return false;
     }
 
-    if ($password === $password2) {
+    if ($password !== $password2) {
         echo "<script>
         alert('konfigurasi password anda tidak sama');
         </script>";
