@@ -84,7 +84,6 @@ function hapus($id)
 
 function ubah($data)
 {
-    var_dump($data);
 
     global $conn;
     $id = $data['id'];

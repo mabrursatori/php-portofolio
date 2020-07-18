@@ -40,40 +40,51 @@ alert('Data gagal diubah');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
 
 <body>
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= $mhs['id']; ?>">
-        <input type="hidden" name="gambarLama" value="<?= $mhs['gambar']; ?>">
-        <ul>
-            <li>
-                <label for="nrp">NRP : </label>
-                <input type="text" name="nrp" id="nrp" required value="<?= $mhs['nrp']; ?>">
-            </li>
-            <li>
-                <label for="nama">Nama : </label>
-                <input type="text" name="nama" id="nama" required value="<?= $mhs['nama']; ?>">
-            </li>
-            <li>
-                <label for="email">Email : </label>
-                <input type="text" name="email" id="email" required value="<?= $mhs['email']; ?>">
-            </li>
-            <li>
-                <label for="jurusan">Jurusan : </label>
-                <input type="text" name="jurusan" id="jurusan" required value="<?= $mhs['jurusan']; ?>">
-            </li>
-            <li>
-                <label for="gambar">Gambar : </label>
-                <input type="file" name="gambar" id="gambar">
-                <img src="img/<?= $mhs['gambar']; ?>" alt="">
-            </li>
-            <li>
-                <button type="submit" name="submit">Tambah Data</button>
-            </li>
-        </ul>
-    </form>
 
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-6" style="position: relativ;">
+                <h1 class="h1">Form Ubah Data Mahasiswa</h1>
+                <a href="index.php" type="submit" class="btn btn-primary btn-beranda">Kembali Ke Beranda</a>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $mhs['id']; ?>">
+                    <input type="hidden" name="gambarLama" value="<?= $mhs['gambar']; ?>">
+                    <div class="form-group">
+                        <label for="nrp">NRP</label>
+                        <input type="text" class="form-control" name="nrp" id="nrp" required value="<?= $mhs['nrp']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" name="nama" id="nama" required value="<?= $mhs['nama']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" required value="<?= $mhs['email']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="jurusan">Jurusan</label>
+                        <input type="text" class="form-control" name="jurusan" id="jurusan" required value="<?= $mhs['jurusan']; ?>"="Enter Jurusan">
+                    </div>
+                    <div class="row ml-1">
+                        <img src="img/<?= $mhs['gambar']; ?>" class="img-thumbnail col-4" width="120px">
+                        <div class="custom-file col-7">
+                            <input type="file" class="custom-file-input align-self-start" id="gambar" name="gambar">
+                            <label class="custom-file-label" for="gambar">Choose Image</label>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary mt-2" name="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
