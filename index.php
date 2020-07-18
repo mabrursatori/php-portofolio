@@ -36,8 +36,8 @@ if (isset($_POST['cari'])) {
     <h1>Daftar Mahasiswa</h1>
 
     <form action="" method="post">
-        <input type="text" name="keyword" size="40" autofocus autocomplete="off" placeholder="Masukan keyword pencarian">
-        <button type="submit" name="cari">Cari</button>
+        <input type="text" id="keyword" name="keyword" size="40" autofocus autocomplete="off" placeholder="Masukan keyword pencarian">
+        <button type="submit" id="tombol-cari" name="cari">Cari</button>
     </form>
     <a href="tambah.php">Tambahkan Mahasiswa</a>
     <br><br>
@@ -54,34 +54,37 @@ if (isset($_POST['cari'])) {
     <?php if ($halamanAktif < $jumlahHalaman) : ?>
         <a href="?halaman=<?= $halamanAktif + 1; ?>">&gt;</a>
     <?php endif; ?>
-
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>No.</th>
-            <th>Aksi</th>
-            <th>Gambar</th>
-            <th>NRP</th>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Jurusan</th>
-        </tr>
-        <?php $i = 1; ?>
-        <?php foreach ($mahasiswa as $mhs) : ?>
+    <div id="container">
+        <table border="1" cellpadding="10" cellspacing="0">
             <tr>
-                <td><?= $i + $awalData; ?></td>
-                <td>
-                    <a href="ubah.php?id=<?= $mhs['id']; ?>">Edit</a> |
-                    <a href="hapus.php?id=<?= $mhs['id']; ?>" onclick=" return confirm('apakah anda yakin?');">Delete</a>
-                </td>
-                <td><img src="img/<?= $mhs['gambar']; ?>" width="100"></td>
-                <td><?= $mhs['nrp']; ?></td>
-                <td><?= $mhs['nama']; ?></td>
-                <td><?= $mhs['email']; ?></td>
-                <td><?= $mhs['jurusan']; ?></td>
-                <?php $i++; ?>
+                <th>No.</th>
+                <th>Aksi</th>
+                <th>Gambar</th>
+                <th>NRP</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Jurusan</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
+            <?php $i = 1; ?>
+            <?php foreach ($mahasiswa as $mhs) : ?>
+                <tr>
+                    <td><?= $i + $awalData; ?></td>
+                    <td>
+                        <a href="ubah.php?id=<?= $mhs['id']; ?>">Edit</a> |
+                        <a href="hapus.php?id=<?= $mhs['id']; ?>" onclick=" return confirm('apakah anda yakin?');">Delete</a>
+                    </td>
+                    <td><img src="img/<?= $mhs['gambar']; ?>" width="100"></td>
+                    <td><?= $mhs['nrp']; ?></td>
+                    <td><?= $mhs['nama']; ?></td>
+                    <td><?= $mhs['email']; ?></td>
+                    <td><?= $mhs['jurusan']; ?></td>
+                    <?php $i++; ?>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
