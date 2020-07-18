@@ -53,30 +53,43 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
 
 <body>
-    <?php if (isset($error)) : ?>
-        <p style="color: red;">login gagal</p>
-    <?php endif; ?>
-    <form action="" method="post">
-        <ul>
-            <li>
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username">
-            </li>
-            <li>
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
-            </li>
-            <li>
-                <input type="checkbox" name="remember" id="remember">
-                <label for="remember">Remember Me</label>
-            </li>
-            <li>
-                <button type="submit" name="login">Login</button>
-            </li>
-        </ul>
-    </form>
+
+    <div class="container">
+        <div class="row mt-5"></div>
+        <div class="row mt-5"></div>
+        <div class="row mt-5">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <h1 class="h1 title-login">User Login</h1>
+                <?php if (isset($error)) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        Username atau Password anda salah!
+                    </div>
+                <?php endif; ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" for="username" class="username-login">Username</label>
+                        <input type="text" class="form-control" placeholder="Enter username" name="username" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" for="password" class="password-login">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter passwords" name="password" id="password">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="remember" id="remember">
+                        <label class="form-check-label" for="remember">Remember Me!</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2" name="login">Login</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>
