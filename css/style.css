@@ -1,3 +1,18 @@
 .title-login {
   text-align: center;
 }
+#formSearch {
+  float: right;
+  margin-top: 40px;
+}
+
+#pagination {
+  margin-bottom: -10px;
+}
+
+.btn-beranda {
+  float: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

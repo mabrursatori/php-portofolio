@@ -66,6 +66,7 @@ if (isset($_POST['login'])) {
             <div class="col-3"></div>
             <div class="col-6">
                 <h1 class="h1 title-login">User Login</h1>
+                <button href="index.php" type="submit" class="btn btn-primary btn-beranda">Kembali Ke Beranda</button>
                 <?php if (isset($error)) : ?>
                     <div class="alert alert-danger" role="alert">
                         Username atau Password anda salah!
