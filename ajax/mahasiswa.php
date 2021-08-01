@@ -6,30 +6,34 @@ $query = "SELECT * FROM mahasiswa WHERE nama LIKE '%$keyword%' OR nrp LIKE '%$ke
 
 $mahasiswa = query($query);
 ?>
-<table border="1" cellpadding="10" cellspacing="0">
-    <tr>
-        <th>No.</th>
-        <th>Aksi</th>
-        <th>Gambar</th>
-        <th>NRP</th>
-        <th>Nama</th>
-        <th>Email</th>
-        <th>Jurusan</th>
-    </tr>
-    <?php $i = 1; ?>
-    <?php foreach ($mahasiswa as $mhs) : ?>
-        <tr>
-            <td><?= $i; ?></td>
-            <td>
-                <a href="ubah.php?id=<?= $mhs['id']; ?>">Edit</a> |
-                <a href="hapus.php?id=<?= $mhs['id']; ?>" onclick=" return confirm('apakah anda yakin?');">Delete</a>
-            </td>
-            <td><img src="img/<?= $mhs['gambar']; ?>" width="100"></td>
-            <td><?= $mhs['nrp']; ?></td>
-            <td><?= $mhs['nama']; ?></td>
-            <td><?= $mhs['email']; ?></td>
-            <td><?= $mhs['jurusan']; ?></td>
-            <?php $i++; ?>
+<table border="1" cellpadding="10" cellspacing="0" class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="bg-primary">
+            <th scope="col">No.</th>
+            <th scope="col">Aksi</th>
+            <th scope="col">Gambar</th>
+            <th scope="col">NRP</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Jurusan</th>
         </tr>
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+        <?php $i = 1; ?>
+        <?php foreach ($mahasiswa as $mhs) : ?>
+            <tr>
+                <th scope="row"><?= $i; ?></th>
+                <td>
+                    <a class="btn btn-success" href="ubah.php?id=<?= $mhs['id']; ?>">Edit</a>
+                    <a class="btn btn-danger" href="hapus.php?id=<?= $mhs['id']; ?>" onclick=" return confirm('apakah anda yakin?');">Delete</a>
+                </td>
+                <td><img src="img/<?= $mhs['gambar']; ?>" width="100"></td>
+                <td><?= $mhs['nrp']; ?></td>
+                <td><?= $mhs['nama']; ?></td>
+                <td><?= $mhs['email']; ?></td>
+                <td><?= $mhs['jurusan']; ?></td>
+                <?php $i++; ?>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>

@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "phpdasar");
+$conn = mysqli_connect("sql307.epizy.com", "epiz_27436096", "DFnq7SLwbZxnea", "epiz_27436096_portofolio");
 
 
 function query($query)
@@ -17,18 +17,23 @@ function query($query)
 function tambah($data)
 {
     global $conn;
-    $nrp = htmlspecialchars($data['nrp']);
-    $nama = htmlspecialchars($data['nama']);
-    $email = htmlspecialchars($data['email']);
-    $jurusan = htmlspecialchars($data['jurusan']);
+    $number = $data['number'];
+    $name = $data['name'];
+    $technology = $data['technology'];
+    $type = $data['type'];
+    $link = $data['link'];
+    $youtube = $data['youtube'];
+    $developer = $data['developer'];
+    $description = $data['description'];
 
 
-    $gambar = upload();
-    if (!$gambar) {
+    $image = upload();
+    if (!$image) {
         return false;
     }
 
-    $query = "INSERT INTO mahasiswa VALUES ('', '$nrp', '$nama', '$email', '$jurusan', '$gambar')";
+    $query = "INSERT INTO portofolios (number, name, technology, type, link, youtube, image, developer, description)
+    VALUES ($number, '$name', '$technology', '$type', '$link', '$youtube', '$image', '$developer', '$description')";
 
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
@@ -36,16 +41,16 @@ function tambah($data)
 
 function upload()
 {
-    $namaFile = $_FILES['gambar']['name'];
-    $ukuranFile = $_FILES['gambar']['size'];
-    $error = $_FILES['gambar']['error'];
-    $tmpName = $_FILES['gambar']['tmp_name'];
+    $namaFile = $_FILES['image']['name'];
+    $ukuranFile = $_FILES['image']['size'];
+    $error = $_FILES['image']['error'];
+    $tmpName = $_FILES['image']['tmp_name'];
 
     if ($error === 4) {
         echo "<script>
     alert('pilih gambar terlebih dahulu');
     </script>";
-        return false;
+        return null;
     }
 
     $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
@@ -58,18 +63,13 @@ function upload()
         return false;
     }
 
-    if ($ukuranFile > 1000000) {
-        echo "<script>
-        alert('Ukuran gambar terlalu besar');
-        </script>";
-        return false;
-    }
+
 
     $namaFileBaru = uniqid();
     $namaFileBaru .= '.';
     $namaFileBaru .= $ekstensiGambar;
 
-    move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
+    move_uploaded_file($tmpName, 'images/' . $namaFileBaru);
 
     return $namaFileBaru;
 }
@@ -77,32 +77,70 @@ function upload()
 function hapus($id)
 {
     global $conn;
-    mysqli_query($conn, "DELETE FROM mahasiswa WHERE id = $id");
+    mysqli_query($conn, "DELETE FROM portofolios WHERE id = $id");
 
     return mysqli_affected_rows($conn);
 }
 
-function ubah($data)
+function update($data)
 {
 
     global $conn;
     $id = $data['id'];
-    $nrp = htmlspecialchars($data['nrp']);
-    $nama = htmlspecialchars($data['nama']);
-    $email = htmlspecialchars($data['email']);
-    $jurusan = htmlspecialchars($data['jurusan']);
-    $gambarLama = htmlspecialchars($data['gambarLama']);
+    $number = $data['number'];
+    $name = $data['name'];
+    $technology = $data['technology'];
+    $type = $data['type'];
+    $link = $data['link'];
+    $youtube = $data['youtube'];
+    $developer = $data['developer'];
+    $description = $data['description'];
+    $oldImage = $data['oldImage'];
 
-    if ($_FILES['gambar']['error'] === 4) {
-        $gambar = $gambarLama;
+    if ($_FILES['image']['error'] === 4) {
+        $image = $oldImage;
     } else {
-        $gambar = upload();
+        $image = upload();
     }
 
-    $query = "UPDATE mahasiswa SET nrp = '$nrp', nama = '$nama', email = '$email', jurusan = '$jurusan', gambar = '$gambar' WHERE id = $id";
+    $query = "UPDATE portofolios SET number = $number, name = '$name', technology = '$technology',
+     type = '$type', image = '$image', link = '$link', youtube = '$youtube', developer = '$developer',
+     description = '$description' WHERE id = $id";
 
     mysqli_query($conn, $query);
-    echo mysqli_affected_rows($conn);
+    return mysqli_affected_rows($conn);
+}
+
+function updateBio($data)
+{
+    global $conn;
+    $id = $data['id'];
+    $nama = $data['nama'];
+    $email = $data['email'];
+    $password = $data['password'];
+    $ttl = $data['ttl'];
+    $jabatan = $data['jabatan'];
+    $skill = $data['skill'];
+    $telepon = $data['telepon'];
+    $github = $data['github'];
+    $portofolio = $data['portofolio'];
+    $first_paragraf = $data['first_paragraf'];
+    $second_paragraf = $data['second_paragraf'];
+    $pengalaman = $data['pengalaman'];
+    $oldImage = $data['oldImage'];
+
+    if ($_FILES['image']['error'] === 4) {
+        $image = $oldImage;
+    } else {
+        $image = upload();
+    }
+
+    $query = "UPDATE users SET nama = '$nama', email = '$email',
+     password = '$password', ttl = '$ttl', jabatan = '$jabatan', skill = '$skill', telepon = '$telepon',
+     github = '$github', portofolio = '$portofolio', first_paragraf = '$first_paragraf', second_paragraf = '$second_paragraf', 
+     pengalaman = '$pengalaman', image = '$image' WHERE id = $id";
+
+    mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
 
@@ -131,9 +169,6 @@ function registrasi($data)
     }
 
     if ($password !== $password2) {
-        echo "<script>
-        alert('konfigurasi password anda tidak sama');
-        </script>";
         return false;
     }
 

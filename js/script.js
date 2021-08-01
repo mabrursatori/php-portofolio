@@ -1,33 +1,30 @@
-var keyword = document.getElementById("keyword");
-var tombolCari = document.getElementById("tombol-cari");
-var container = document.getElementById("container");
-//Live search pakai ajax
-// keyword.addEventListener("keyup", function () {
-//   var xhr = new XMLHttpRequest();
+$(function () {
+  $(".btnTambahData").on("click", function () {
+    $("#modalLabel").html("Form Tambah Data Mahasiswa");
+    $(".modal-footer button[type=submit]").html("Tambah Data");
+  });
+  $(".btnUbahData").on("click", function () {
+    $("#modalLabel").html("Form Ubah Data Mahasiswa");
+    $(".modal-footer button[type=submit]").html("Ubah Data");
+    $(".modal-body form").attr(
+      "action",
+      "http://localhost/phpmvc/public/mahasiswa/ubah"
+    );
 
-//   xhr.onreadystatechange = function () {
-//     if (xhr.readyState == 4 && xhr.status == 200) {
-//       container.innerHTML = xhr.responseText;
-//       //   alert("ajax oke");\
-//       //   alert(xhr.responseText);
-//     }
-//   };
-//   xhr.open("GET", "ajax/mahasiswa.php?keyword=" + keyword.value, true);
-//   xhr.send();
-// });
+    const id = $(this).data("id");
 
-$(document).ready(function () {
-  $("#tombol-cari").hide();
-
-  $("#keyword").on("keyup", function () {
-    // $(".loader").show();
-
-    //live search pakai load
-    // $("#container").load("ajax/mahasiswa.php?keyword=" + $("#keyword").val());
-
-    $.get("ajax/mahasiswa.php?keyword=" + $("#keyword").val(), function (data) {
-      $("#container").html(data);
-      // $(".loader").hide();
+    $.ajax({
+      url: "http://localhost/phpmvc/public/mahasiswa/getubah",
+      data: { id: id },
+      method: "post",
+      dataType: "json",
+      success: function (data) {
+        $("#nrp").val(data.nrp);
+        $("#nama").val(data.nama);
+        $("#email").val(data.email);
+        $("#jurusan").val(data.jurusan);
+        $("#id").val(data.id);
+      },
     });
   });
 });
